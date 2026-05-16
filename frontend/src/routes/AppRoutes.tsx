@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { LeadDetailsPage } from "../pages/LeadDetailsPage";
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -8,6 +9,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 export const AppRoutes = () => (
   <Routes>
     <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
     <Route
       path="/"
       element={

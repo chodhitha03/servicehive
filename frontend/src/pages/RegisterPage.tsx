@@ -1,31 +1,31 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router-dom";
-import { loginSchema, LoginFormValues } from "../features/auth/schema";
+import { useNavigate, Link } from "react-router-dom";
+import { registerSchema, RegisterFormValues } from "../features/auth/schema";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import { useAuth } from "../store/auth";
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { register: registerUser } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema)
+  } = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerSchema)
   });
 
-  const onSubmit = async (values: LoginFormValues) => {
+  const onSubmit = async (values: RegisterFormValues) => {
     setError(null);
     try {
-      await login(values);
+      await registerUser(values);
       navigate("/");
     } catch (err) {
-      setError("Unable to sign in. Check credentials and try again.");
+      setError("Unable to create account. Email might already be in use.");
     }
   };
 
@@ -36,12 +36,13 @@ export const LoginPage = () => {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-500 mb-2">
             ServiceHive
           </p>
-          <h1 className="font-display text-4xl text-ink-900 mb-2 tracking-tight">Sign in</h1>
+          <h1 className="font-display text-4xl text-ink-900 mb-2 tracking-tight">Create Account</h1>
           <p className="text-sm text-ink-500">
-            Welcome back. Manage your lead pipeline in one place.
+            Join us and start managing your leads like a pro.
           </p>
         </div>
         <form className="grid gap-5" onSubmit={handleSubmit(onSubmit)}>
+          <Input label="Name" error={errors.name?.message} {...register("name")} />
           <Input label="Email" error={errors.email?.message} {...register("email")} />
           <Input
             label="Password"
@@ -51,12 +52,12 @@ export const LoginPage = () => {
           />
           {error ? <p className="text-sm font-medium text-rose-500">{error}</p> : null}
           <Button type="submit" disabled={isSubmitting} className="mt-2 h-12 text-base shadow-brand-500/20 shadow-lg">
-            {isSubmitting ? "Signing in..." : "Sign in"}
+            {isSubmitting ? "Creating account..." : "Sign up"}
           </Button>
           <p className="text-center text-sm text-ink-500 mt-2">
-            Don't have an account?{" "}
-            <Link to="/register" className="font-medium text-brand-500 hover:text-brand-700 underline underline-offset-4">
-              Sign up
+            Already have an account?{" "}
+            <Link to="/login" className="font-medium text-brand-500 hover:text-brand-700 underline underline-offset-4">
+              Sign in
             </Link>
           </p>
         </form>

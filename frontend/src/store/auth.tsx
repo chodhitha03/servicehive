@@ -16,6 +16,7 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (payload: { email: string; password: string }) => Promise<void>;
+  register: (payload: { name: string; email: string; password: string }) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -63,6 +64,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setSession(response);
   }, []);
 
+  const register = useCallback(async (payload: { name: string; email: string; password: string }) => {
+    const response = await authApi.register(payload);
+    setSession(response);
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       await authApi.logout();
@@ -77,9 +83,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       isAuthenticated: Boolean(user),
       isLoading,
       login,
+      register,
       logout
     }),
-    [user, isLoading, login, logout]
+    [user, isLoading, login, register, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
