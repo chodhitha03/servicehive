@@ -38,8 +38,8 @@ export const buildLeadFilter = (
 
 export const buildLeadSort = (sort?: string) => {
   if (sort === "oldest") {
-    return { createdAt: 1 };
+    return { createdAt: 1 } as const;
   }
 
-  return { createdAt: -1 };
+  return { createdAt: -1 } as const;
 };

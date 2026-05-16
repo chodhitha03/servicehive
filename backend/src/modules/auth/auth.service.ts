@@ -23,10 +23,10 @@ const toAuthUser = (user: UserDocument): AuthUser => ({
 const signTokens = (payload: JwtPayload): AuthTokens => ({
   accessToken: jwt.sign(payload, env.JWT_ACCESS_SECRET, {
     expiresIn: env.JWT_ACCESS_EXPIRES_IN
-  }),
+  } as jwt.SignOptions),
   refreshToken: jwt.sign(payload, env.JWT_REFRESH_SECRET, {
     expiresIn: env.JWT_REFRESH_EXPIRES_IN
-  })
+  } as jwt.SignOptions)
 });
 
 export const register = async (input: RegisterInput) => {
