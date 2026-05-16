@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: servicehive-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: servicehive-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/servicehive
+      JWT_ACCESS_SECRET: change-me-access
+      JWT_REFRESH_SECRET: change-me-refresh
+      JWT_ACCESS_EXPIRES_IN: 15m
+      JWT_REFRESH_EXPIRES_IN: 7d
+      CORS_ORIGIN: http://localhost:5173
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:4000/api
+    container_name: servicehive-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:

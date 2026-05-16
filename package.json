@@ -1,0 +1,12 @@
+{
+  "name": "servicehive",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "mongodb": "^7.2.0"
+  }
+}
