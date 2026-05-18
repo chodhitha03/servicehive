@@ -7,6 +7,8 @@ import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { ResetPasswordConfirmPage } from "../pages/ResetPasswordConfirmPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { LeadDetailsPage } from "../pages/LeadDetailsPage";
+import { CustomersPage } from "../pages/CustomersPage";
+import { ReportsPage } from "../pages/ReportsPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 export const AppRoutes = () => (
@@ -25,6 +27,8 @@ export const AppRoutes = () => (
       }
     >
       <Route index element={<DashboardPage />} />
+      <Route path="customers" element={<CustomersPage />} />
+      <Route path="reports" element={<ReportsPage />} />
       <Route path="leads/:leadId" element={<LeadDetailsPage />} />
     </Route>
     <Route path="*" element={<Navigate to="/" replace />} />
