@@ -1,34 +1,29 @@
-import { Button } from "../ui/Button";
 import { useAuth } from "../../store/auth";
-import { useTheme } from "../../hooks/useTheme";
+import { ThemeToggle } from "../ui/ThemeToggle";
 
 export const Header = () => {
   const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 bg-white/70 px-6 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70 transition-colors">
-      <div>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink-500 dark:text-slate-400">
-          Lead Management
-        </p>
-        <h2 className="font-display text-2xl text-ink-900 dark:text-white">Smart Leads</h2>
+    <header className="flex h-14 shrink-0 items-center justify-between border-b border-gray-200 dark:border-white/10 px-6">
+      <div className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        <span>Workspace</span>
+        <span className="text-gray-400">/</span>
+        <span className="text-gray-900 dark:text-white">Leads</span>
       </div>
       <div className="flex items-center gap-4">
-        <button
-          onClick={toggleTheme}
-          className="rounded-full p-2 text-ink-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
-          aria-label="Toggle Dark Mode"
-        >
-          {theme === "dark" ? "☀️" : "🌙"}
-        </button>
-        <div className="text-right">
-          <p className="text-sm font-semibold text-ink-900 dark:text-slate-200">{user?.name}</p>
-          <p className="text-xs text-brand-500 font-medium">{user?.role}</p>
+        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 text-xs font-semibold text-gray-900 dark:text-white">
+            {user?.name?.[0]?.toUpperCase()}
+          </div>
+          <button 
+            onClick={() => void logout()}
+            className="text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
+            Sign out
+          </button>
         </div>
-        <Button variant="ghost" onClick={() => void logout()} className="dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800">
-          Sign out
-        </Button>
       </div>
     </header>
   );

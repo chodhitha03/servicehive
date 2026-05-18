@@ -23,43 +23,66 @@ export const LoginPage = () => {
     setError(null);
     try {
       await login(values);
-      navigate("/");
+      navigate("/app");
     } catch (err) {
       setError("Unable to sign in. Check credentials and try again.");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md rounded-3xl bg-white/90 p-8 shadow-soft backdrop-blur-xl border border-white/20">
-        <div className="mb-6">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-500 mb-2">
-            ServiceHive
-          </p>
-          <h1 className="font-display text-4xl text-ink-900 mb-2 tracking-tight">Sign in</h1>
-          <p className="text-sm text-ink-500">
-            Welcome back. Manage your lead pipeline in one place.
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 dark:bg-black px-6">
+      <div className="w-full max-w-sm space-y-8 animate-fade-in">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Sign in to ServiceHive</h2>
+          <p className="mt-2 text-sm text-gray-500">
+            Welcome back. Please enter your details.
           </p>
         </div>
-        <form className="grid gap-5" onSubmit={handleSubmit(onSubmit)}>
-          <Input label="Email" error={errors.email?.message} {...register("email")} />
-          <Input
-            label="Password"
-            type="password"
-            error={errors.password?.message}
-            {...register("password")}
-          />
-          {error ? <p className="text-sm font-medium text-rose-500">{error}</p> : null}
-          <Button type="submit" disabled={isSubmitting} className="mt-2 h-12 text-base shadow-brand-500/20 shadow-lg">
+
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-4">
+            <Input
+              label="Email"
+              type="email"
+              placeholder="name@example.com"
+              error={errors.email?.message}
+              {...register("email")}
+            />
+            <Input
+              label="Password"
+              type="password"
+              placeholder="••••••••"
+              error={errors.password?.message}
+              {...register("password")}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="text-sm"></div>
+            <div className="text-sm">
+              <Link to="/forgot-password" className="font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                Forgot password?
+              </Link>
+            </div>
+          </div>
+
+          {error ? (
+            <div className="rounded-md bg-rose-50 dark:bg-rose-500/10 p-3 text-sm text-rose-500 dark:text-rose-400">
+              {error}
+            </div>
+          ) : null}
+
+          <Button type="submit" disabled={isSubmitting} className="w-full h-11 text-sm">
             {isSubmitting ? "Signing in..." : "Sign in"}
           </Button>
-          <p className="text-center text-sm text-ink-500 mt-2">
-            Don't have an account?{" "}
-            <Link to="/register" className="font-medium text-brand-500 hover:text-brand-700 underline underline-offset-4">
-              Sign up
-            </Link>
-          </p>
         </form>
+
+        <p className="text-center text-sm text-gray-500">
+          Don't have an account?{" "}
+          <Link to="/register" className="font-medium text-gray-900 dark:text-white hover:underline">
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );

@@ -23,9 +23,9 @@ const statusTone = (status: Lead["status"]) => {
 };
 
 export const LeadsTable = ({ leads, onEdit, onDelete }: LeadsTableProps) => (
-  <div className="overflow-hidden rounded-3xl bg-white/90 shadow-card">
-    <table className="w-full text-left text-sm">
-      <thead className="bg-slate-50 text-xs uppercase tracking-[0.16em] text-ink-500">
+  <div className="overflow-x-auto rounded-xl bg-white dark:bg-[#0a0a0a] shadow-soft">
+    <table className="min-w-[760px] w-full text-left text-sm">
+      <thead className="bg-slate-50 text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-500">
         <tr>
           <th className="px-4 py-3">Lead</th>
           <th className="px-4 py-3">Status</th>
@@ -40,12 +40,12 @@ export const LeadsTable = ({ leads, onEdit, onDelete }: LeadsTableProps) => (
           <tr key={lead._id} className="text-ink-700">
             <td className="px-4 py-3">
               <Link
-                to={`/leads/${lead._id}`}
-                className="font-semibold text-ink-900 hover:text-brand-700"
+                to={`/app/leads/${lead._id}`}
+                className="font-semibold text-gray-900 dark:text-white dark:text-black hover:text-brand-700"
               >
                 {lead.name}
               </Link>
-              <div className="text-xs text-ink-500">{lead.email}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-500">{lead.email}</div>
             </td>
             <td className="px-4 py-3">
               <Badge text={lead.status} tone={statusTone(lead.status)} />

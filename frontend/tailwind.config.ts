@@ -6,31 +6,48 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui"],
-        display: ["Outfit", "ui-sans-serif", "system-ui"]
+        sans: ["Inter", "ui-sans-serif", "system-ui"],
+        display: ["Inter", "ui-sans-serif", "system-ui"]
       },
       colors: {
         brand: {
-          50: "#eff6ff",
-          200: "#bfdbfe",
-          500: "#3b82f6",
-          700: "#1d4ed8"
+          50: "#f8f9fa",
+          100: "#f1f3f5",
+          200: "#e9ecef",
+          300: "#dee2e6",
+          400: "#ced4da",
+          500: "#adb5bd",
+          600: "#868e96",
+          700: "#495057",
+          800: "#343a40",
+          900: "#212529"
         },
         ink: {
-          900: "#0f172a",
-          700: "#334155",
-          500: "#64748b"
-        },
-        sand: {
-          50: "#f8fafc",
-          200: "#e2e8f0",
-          400: "#94a3b8"
+          900: "#ffffff",
+          800: "#f8f9fa",
+          700: "#e9ecef",
+          600: "#ced4da",
+          500: "#adb5bd",
+          400: "#868e96",
+          300: "#495057",
+          200: "#343a40",
+          100: "#212529",
+          50: "#000000"
         }
       },
       boxShadow: {
-        soft: "0 4px 20px rgba(15, 23, 42, 0.05)",
-        card: "0 2px 10px rgba(15, 23, 42, 0.03), 0 0 1px rgba(15, 23, 42, 0.1)",
-        glass: "0 8px 32px 0 rgba(31, 38, 135, 0.07)"
+        soft: "0 0 0 1px rgba(255,255,255,0.05)",
+        card: "0 0 0 1px rgba(255,255,255,0.05), 0 4px 6px rgba(0,0,0,0.2)",
+        glow: "0 0 20px rgba(255,255,255,0.05)"
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0", transform: "translateY(4px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" }
+        }
+      },
+      animation: {
+        "fade-in": "fade-in 0.4s ease-out forwards"
       }
     }
   },

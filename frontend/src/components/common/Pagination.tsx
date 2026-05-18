@@ -12,8 +12,8 @@ export const Pagination = ({ meta, onPageChange }: PaginationProps) => {
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-card">
-      <p className="text-sm text-ink-500">
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0a0a0a] px-4 py-3 shadow-soft">
+      <p className="text-sm text-gray-500 dark:text-gray-500">
         Page {meta.currentPage} of {meta.totalPages}
       </p>
       <div className="flex items-center gap-2">

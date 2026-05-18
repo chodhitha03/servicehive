@@ -18,7 +18,7 @@ export const LeadFilters = ({
   search,
   onSearchChange
 }: LeadFiltersProps) => (
-  <div className="grid gap-4 rounded-3xl bg-white/80 p-5 shadow-card lg:grid-cols-4">
+  <div className="grid gap-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0a0a0a] p-5 shadow-soft lg:grid-cols-4">
     <Input
       label="Search"
       placeholder="Search by name or email"

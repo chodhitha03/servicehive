@@ -8,18 +8,18 @@ interface SelectProps extends ComponentPropsWithRef<"select"> {
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ label, error, className, ...props }, ref) => (
-    <label className="flex flex-col gap-1 text-sm text-ink-700">
-      {label ? <span className="font-semibold">{label}</span> : null}
+    <label className="flex flex-col gap-1.5 text-sm text-gray-500 dark:text-gray-500">
+      {label ? <span className="font-medium text-gray-600 dark:text-gray-400">{label}</span> : null}
       <select
         ref={ref}
         className={clsx(
-          "rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-ink-900 shadow-sm outline-none transition focus:border-brand-500",
-          error ? "border-rose-400" : "",
+          "rounded-md border border-gray-300 dark:border-white/20 bg-white dark:bg-[#0a0a0a] px-3 py-2 text-sm text-gray-900 dark:text-white dark:text-black shadow-sm outline-none transition-colors focus:border-gray-500 focus:ring-1 focus:ring-gray-500",
+          error ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500" : "",
           className
         )}
         {...props}
       />
-      {error ? <span className="text-xs text-rose-500">{error}</span> : null}
+      {error ? <span className="text-xs font-medium text-rose-500">{error}</span> : null}
     </label>
   )
 );

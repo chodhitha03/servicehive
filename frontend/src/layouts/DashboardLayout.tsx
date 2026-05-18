@@ -3,12 +3,14 @@ import { Header } from "../components/layout/Header";
 import { Sidebar } from "../components/layout/Sidebar";
 
 export const DashboardLayout = () => (
-  <div className="min-h-screen bg-transparent lg:flex">
+  <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-black text-gray-900 dark:text-white dark:text-black">
     <Sidebar />
-    <div className="flex min-h-screen flex-1 flex-col">
+    <div className="flex flex-1 flex-col overflow-hidden relative">
       <Header />
-      <main className="flex-1 p-6 lg:p-8">
-        <Outlet />
+      <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-8">
+        <div className="mx-auto max-w-5xl">
+          <Outlet />
+        </div>
       </main>
     </div>
   </div>
