@@ -33,3 +33,8 @@ export const me = async (req: Request, res: Response) => {
   const result = await authService.getMe(user.userId);
   return sendSuccess(res, 200, "User profile", result);
 };
+
+export const resetPassword = async (req: Request, res: Response) => {
+  await authService.resetPassword(req.body);
+  return sendSuccess(res, 200, "Password reset successfully");
+};

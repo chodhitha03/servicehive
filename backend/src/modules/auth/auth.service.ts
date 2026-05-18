@@ -111,3 +111,12 @@ export const getMe = async (userId: string): Promise<AuthUser> => {
 
   return toAuthUser(user);
 };
+
+export const resetPassword = async ({ email, newPassword }: any) => {
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+  user.passwordHash = await bcrypt.hash(newPassword, 12);
+  await user.save();
+};

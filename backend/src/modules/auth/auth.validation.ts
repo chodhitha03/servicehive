@@ -27,3 +27,10 @@ export const refreshSchema = z.object({
     refreshToken: z.string().min(1, "Refresh token required")
   })
 });
+
+export const resetPasswordSchema = z.object({
+  body: z.object({
+    email: z.string().email("Valid email required"),
+    newPassword: passwordSchema
+  })
+});

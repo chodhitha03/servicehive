@@ -3,7 +3,7 @@ import { asyncHandler } from "../../shared/utils/async-handler";
 import { validate } from "../../middleware/validate.middleware";
 import { authMiddleware } from "../../middleware/auth.middleware";
 import * as authController from "./auth.controller";
-import { loginSchema, refreshSchema, registerSchema } from "./auth.validation";
+import { loginSchema, refreshSchema, registerSchema, resetPasswordSchema } from "./auth.validation";
 
 export const authRoutes = Router();
 
@@ -32,3 +32,9 @@ authRoutes.post(
 );
 
 authRoutes.get("/me", authMiddleware, asyncHandler(authController.me));
+
+authRoutes.post(
+  "/reset-password",
+  validate(resetPasswordSchema),
+  asyncHandler(authController.resetPassword)
+);
